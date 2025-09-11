@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "硬刷新按钮",
+  "version": "1.0",
+  "description": "一个可以拖动的按钮，点击后硬刷新当前页面",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
