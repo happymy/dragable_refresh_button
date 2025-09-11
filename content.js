@@ -15,6 +15,16 @@ function createRefreshButton() {
 
   document.body.appendChild(button);
 
+  // 恢复保存的位置
+  const pageKey = `refresh-button-position-${window.location.hostname}`;
+  const savedPosition = localStorage.getItem(pageKey);
+  if (savedPosition) {
+    const { left, top } = JSON.parse(savedPosition);
+    button.style.left = left + 'px';
+    button.style.top = top + 'px';
+    button.style.right = 'auto';
+  }
+
   // 拖动功能
   let isDragging = false;
   let offsetX, offsetY;
@@ -44,6 +54,14 @@ function createRefreshButton() {
   document.addEventListener('mouseup', function() {
     isDragging = false;
     button.style.cursor = 'move';
+    
+    // 保存按钮位置
+    const pageKey = `refresh-button-position-${window.location.hostname}`;
+    const position = {
+      left: parseInt(button.style.left) || 0,
+      top: parseInt(button.style.top) || 0
+    };
+    localStorage.setItem(pageKey, JSON.stringify(position));
   });
 
   // 点击刷新功能
@@ -80,6 +98,14 @@ function createRefreshButton() {
 
   document.addEventListener('touchend', function() {
     isDragging = false;
+    
+    // 保存按钮位置
+    const pageKey = `refresh-button-position-${window.location.hostname}`;
+    const position = {
+      left: parseInt(button.style.left) || 0,
+      top: parseInt(button.style.top) || 0
+    };
+    localStorage.setItem(pageKey, JSON.stringify(position));
   });
 }
 
