@@ -13,11 +13,11 @@
 
 ## 安装方法
 
-1. 打开 Chrome 浏览器
-2. 进入 `chrome://extensions/`
-3. 开启"开发者模式"
-4. 点击"加载已解压的扩展程序"
-5. 选择包含本扩展的文件夹
+1. 打开 Chrome → 进入 `chrome://extensions/`
+2. 开启"开发者模式"
+3. 选择一种方式：
+   - 点击"加载已解压的扩展程序"，选择扩展文件夹
+   - 或将 `refresh-button.zip` 拖入页面
 
 ## 文件结构
 
@@ -25,6 +25,7 @@
 manifest.json    # 扩展配置文件
 content.js       # 内容脚本，实现按钮功能
 styles.css       # 按钮样式
+pack.ps1         # 打包脚本（生成 refresh-button.zip）
 README.md        # 说明文档
 ```
 
@@ -46,3 +47,4 @@ README.md        # 说明文档
 - 按钮的 z-index 设置为 10000，确保显示在最上层
 - 硬刷新会忽略浏览器缓存，重新加载所有资源
 - 在某些受限制的页面可能无法正常工作
+- 运行 `.\pack.ps1` 可重新打包为 zip
