@@ -27,10 +27,12 @@ function createRefreshButton() {
 
   // 拖动功能
   let isDragging = false;
+  let hasDragged = false;
   let offsetX, offsetY;
 
   button.addEventListener('mousedown', function(e) {
     isDragging = true;
+    hasDragged = false;
     offsetX = e.clientX - button.getBoundingClientRect().left;
     offsetY = e.clientY - button.getBoundingClientRect().top;
     button.style.cursor = 'grabbing';
@@ -38,6 +40,7 @@ function createRefreshButton() {
 
   document.addEventListener('mousemove', function(e) {
     if (!isDragging) return;
+    hasDragged = true;
 
     const x = e.clientX - offsetX;
     const y = e.clientY - offsetY;
@@ -66,7 +69,7 @@ function createRefreshButton() {
 
   // 点击刷新功能
   button.addEventListener('click', function(e) {
-    if (!isDragging) {
+    if (!hasDragged) {
       // 硬刷新页面（忽略缓存）
       window.location.reload(true);
     }
@@ -75,6 +78,7 @@ function createRefreshButton() {
   // 触摸设备支持
   button.addEventListener('touchstart', function(e) {
     isDragging = true;
+    hasDragged = false;
     const touch = e.touches[0];
     offsetX = touch.clientX - button.getBoundingClientRect().left;
     offsetY = touch.clientY - button.getBoundingClientRect().top;
@@ -82,6 +86,7 @@ function createRefreshButton() {
 
   document.addEventListener('touchmove', function(e) {
     if (!isDragging) return;
+    hasDragged = true;
     e.preventDefault();
 
     const touch = e.touches[0];
